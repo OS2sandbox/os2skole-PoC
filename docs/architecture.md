@@ -10,12 +10,14 @@ flowchart
     EXT[[External<br>Course<br>Systems]]:::ext
     PORT(External Course Portal):::port
     REP(Reporting and Analytics):::rep
+    MDM((Device Management))
 
     LMS-->REP
     LMS<-->DOC<-->ED
     LMS<-->ID<-->IDP1 & IDP2
     LMS<-->SIS
     LMS-->PORT-->|url|EXT
+    MDM~~~REP
 
 %% The section below defines the styling for the nodes
     classDef lms fill:#d0e6f6,stroke:#007bff,stroke-opacity:0.5,stroke-width:1.5px, color:#333;
