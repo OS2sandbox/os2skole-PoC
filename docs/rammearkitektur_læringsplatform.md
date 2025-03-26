@@ -2,7 +2,7 @@
 ```mermaid
 flowchart LR
  subgraph s1["Læringsplatform"]
-        LMS(("Lærings<br>Styrings<br>System"))
+        LMS(("Lærings Styrings<br>System"))
         DOC[("Dokument<br>Delings<br>System")]
         ID("Identitetsmægler")
         ED("Kontorpakke")
