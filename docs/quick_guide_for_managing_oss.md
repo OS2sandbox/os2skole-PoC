@@ -2,7 +2,7 @@
 
  Proprietary software typically offers a single way for users to access it, with everyone using the same edition of the source code in excactly the same way. 
 
- Open source software, due to its transparent nature and built in freedoms, allows for the separation of three key concepts normally hidden behind the walls of the supplier: the source code, releases, and running instances. 
+ Open source software, due to its transparent nature and built-in freedoms, allows for the separation of three key concepts normally hidden behind the walls of the supplier: the source code, releases, and running instances. 
 
 
 - **Source Code**: The written instructions of the computer programs. This is the raw state of the software fit for developers and security specialists, before it is packaged for the end-users.
@@ -49,3 +49,59 @@ Concepts:
 
 
 MRs / PRs
+
+# 🇩🇰 
+# Lukket vs. Åbent software: _Hvad er forskellen?_
+
+## 🔒 Lukket software
+### Begrænset adgang
+Lukket eller properitært software er udviklet af en begrænset gruppe udviklere hos et enkelt firma, og adgang til kildekoden eller indsigt i udviklingsprocesser eller metoder ikke tilgængelig.
+
+Anvendere tilbyddes kun én måde at få adgang til softwaren på, hvor alle tilgår og bruger den samme udgave af programmet på præcis samme måde. Dette er en fordel for leverandøren, der kan optimere deres udgifter ved at begrænse leverancen. Man kan sige, at lukket software er designet med leverandørens interesser i tankerne, såsom større kontrol og mere profitable forretningsmodeller.
+
+### Kontrol og kompetencer
+
+Som kunde og anvender af et proprietært stykke software er det derfor vigtigt at sætte en omfattende, løbende leverandørkontrol op, der garanterer, at det oprindelige formål med at indkøbe softwaren overholdes, og at man ikke fastlåses som kunde i risikable scenarier. Øget leverandørkontrol medfører uvægerligt øget intern bureaukratisering med deraf følgende udgifter til at sikre de rette kompetencer og personaleressourcer. Undlader man at indregne de løbende udgifter til kontrol eller overvurderer man sin organisations kapacitet til dette, skaber man en betydelig risiko for, at projektet ikke lykkes.
+
+> [!TIP] Læs mere
+>
+> [IT Universitetet i København - Derfor fejlede tre store offentlige it-projekter](https://www.itu.dk/om-itu/presse/nyheder/2016/derfor-fejlede-tre-store-offentlige-it-projekter)
+>
+> [De IT-professionelles fagblad PROSA - De store IT-projekters tid bør være forbi](https://prosabladet.dk/nyheder/nyhed/de-store-it-projekters-tid-boer-vaere-forbi)
+>
+> [Styrelsen for Samfundssikkerhed - Leverandørstyring](https://www.sikkerdigital.dk/myndighed/iso-27001-implementering/leverandoerstyring/)
+>
+> [KL og KOMBITs videncenter - Den gode it-anskaffelse](https://videncenter.kl.dk/viden-og-vaerktoejer/organisering-strategier-og-portefoeljestyring/den-gode-it-anskaffelse)
+
+
+## 💝 Åben software
+
+### Fælles udviling og fleksibilitet
+Åbent software er bygget i fællesskab af mange bidragydere. For at dette skal være praktisk muligt, er både kildekode, processer og metoder tilgængelige og transparente. 
+
+For at kunne høste alle fordelene ved åbent software, skal man have en grundlæggende viden om de begreber 
+
+Åbent software, tillader adskillelse af tre nøglebegreber, som normalt er skjult bag leverandørens mure: kildekoden, udgivelser og kørende instanser.
+
+- **Kildekode**: De skriftlige instruktioner til computerprogrammerne. Dette er den rå tilstand af softwaren, der er beregnet til udviklere og sikkerhedsspecialister, før den pakkes til slutbrugerne.
+- **Udgivelser**: Stabile pakkede former af softwaren, klar til at blive sendt og gjort tilgængelig for brugerne. Modne projekter udgiver ofte for at give slutbrugerne de nyeste forbedringer og sikkerhedsopdateringer.
+- **Instanser**: Live-miljøer, hvor softwaren kører og tilgås af brugerne.
+
+_Lad os bryde disse ned..._
+
+### Kildekoden
+
+Kildekoden er hjertet i ethvert open source-projekt. Den er frit tilgængelig for alle at se, kopiere, ændre og foreslå forbedringer til den oprindelige kode. Denne gennemsigtighed fremmer en samarbejdsmentalitet, der tillader udviklere at lære af hinanden, rette fejl og foreslå nye funktioner.
+
+- #### Kernen
+    **Kernen** er den officielle, stabile, udgivne distribution af softwaren og den, der bruges af størstedelen af brugerne. Et kernehold af vedligeholdere sikrer, at denne kode gennemgås, testes og styres for kvalitet og pålidelighed.
+
+- #### Kopier og Bidrag
+    **Kopier**, kendt som "forks", er uafhængige distributioner af kildekoden, der tillader udvikling og tilpasning uden at påvirke **Kernen**. 
+    **Bidrag** er ændringer foreslået fra disse forks tilbage til Kernen. Disse forslag gennemgås derefter af kernevedligeholderne, før det besluttes, om de er passende til inkludering. Ikke alle forks flettes tilbage; nogle forbliver uafhængige for at tjene forskellige behov, nogle arkiveres blot, efter eksperimentet er afsluttet.
+
+### Udgivelser
+
+Udgivelser er stabile softwareopdateringer, der gøres tilgængelige med jævne mellemrum. Disse opdateringer er testet og pålidelige til generel brug. Open source-projekter fastsætter deres egne udgivelsesplaner, hvor modne projekter udgiver ofte for at give de nyeste forbedringer og sikkerhedsopdateringer.
+
+- #### Mær
