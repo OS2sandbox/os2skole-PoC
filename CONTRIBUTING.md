@@ -44,6 +44,6 @@ Når du er klar til at integrere ændringer til hovedprojektet fra den branch du
 
 Følg nedenstående vejledning for at oprette en Pull Request:
 
->[!TIP] Vejledning/
+>[!TIP] Vejledning
 [Creating a pull request](https://https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 
