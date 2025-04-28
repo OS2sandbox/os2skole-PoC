@@ -3,13 +3,13 @@
 
 ## 🔒 Lukket software
 ### Begrænset adgang
-Lukket eller properitært software er udviklet af en begrænset gruppe udviklere hos et enkelt firma, og adgang til kildekoden eller indsigt i udviklingsprocesserne er begrænset.
+Lukket eller properitært software er udviklet af en begrænset gruppe udviklere hos et enkelt firma, og adgang til kildekoden eller indsigt i udviklingsprocesser og metoder holdes bag lukkede døre.
 
-Anvendere tilbyddes kun én måde at få adgang til softwaren på, hvor alle tilgår og bruger den samme udgave af programmet på præcis samme måde. Dette er en fordel for leverandøren, der kan optimere deres udgifter ved at begrænse leverancen. Man kan sige, at lukket software er designet med leverandørens interesser i tankerne, såsom større kontrol og mere profitable forretningsmodeller.
+Anvendere tilbydes kun én måde at få adgang til softwaren på, hvor alle tilgår og bruger den samme udgave af programmet på præcis samme måde. Dette er en fordel for leverandøren, der kan optimere deres udgifter ved at begrænse leverancen. Man kan sige, at lukket software er designet med leverandørens interesser i tankerne, såsom større kontrol og mere profitable forretningsmodeller.
 
 ### Kontrol og kompetencer
 
-Som kunde og anvender af et proprietært stykke software er det derfor vigtigt at sætte en omfattende, løbende leverandørkontrol op, der garanterer, at det oprindelige formål med at indkøbe softwaren overholdes, og at man ikke fastlåses som kunde i risikable scenarier. Øget leverandørkontrol medfører uvægerligt øget intern bureaukratisering med deraf følgende udgifter til at sikre de rette kompetencer og personaleressourcer. Undlader man at indregne de løbende udgifter til kontrol eller overvurderer man sin organisations kapacitet til dette, skaber man en betydelig risiko for, at projektet ikke lykkes.
+Som kunde og anvender af et proprietært stykke software er det derfor vigtigt at sætte en omfattende, løbende leverandørkontrol op, der garanterer, at det oprindelige formål med at indkøbe softwaren overholdes, og at man ikke fastlåses som kunde i risikable scenarier. Øget leverandørkontrol medfører uvægerligt øget intern bureaukratisering med deraf følgende udgifter til at sikre de rette kompetencer og personaleressourcer. Undlader man at indregne de løbende udgifter til kontrol eller overvurderer man sin organisations kapacitet til dette, viser den historiske koncensus betydelige risici ved indkøb af lukket, properitært software.
 
 > [!TIP] Læs mere
 >
@@ -24,8 +24,12 @@ Som kunde og anvender af et proprietært stykke software er det derfor vigtigt a
 
 ## 💝 Åben software
 
-### Fælles udviling og fleksibilitet
-Åbent software er bygget i fællesskab af mange bidragydere. For at dette skal være praktisk muligt, er både kildekode, processer og metoder tilgængelige og transparente. Vil man høste fordelene ved åbent software, skal man derfor have en grundlæggende viden der aktiverer denne åbenhed til fordel for anvenderne. Uden denne grundviden kan åbent software virke uoverskueligt.
+### Fælles udvikling og handlefrihed
+Åbent software er bygget i brede fællesskaber af mange typer bidragydere. For at dette skal være praktisk muligt, er arbejdet med kildekode, processer og metoder fuldt transparent og offentligt tilgængeligt. Denne åbenhed understøtter en demokratisering af softwaren der sikrer kundernes og anvendernes interesser og muliggører fælles ejerskab for den digitale opgave som softwaren løser ved anvenderne.
+
+Vil man høste alle fordelene ved åbent software, er det dog nødvendigt at åbne for viden som ved lukket software er skjult bag leverandørens mure:
+
+Vil man høste fordelene ved åbent software, skal man derfor have en grundlæggende viden der aktiverer denne åbenhed til fordel for anvenderne. Uden denne grundviden kan åbent software virke uoverskueligt.
 
 Åbent software, tillader adskillelse af tre nøglebegreber, som normalt er skjult bag leverandørens mure: kildekoden, udgivelserne og de kørende instanser. Lad os kigge lidt nærmere på de begreber.
 
@@ -37,16 +41,21 @@ Som kunde og anvender af et proprietært stykke software er det derfor vigtigt a
     
     Stabile pakkede leverancer af softwaren, klar til at blive sendt og gjort tilgængelig for slutbrugerne. Modne projekter udgiver ofte for at give slutbrugerne de nyeste forbedringer og sikkerhedsopdateringer.
 
-**🇩🇰 Instanser / 🇬🇧 Instances:** 
+- **🇩🇰 Instanser / 🇬🇧 Instances:** 
     Live-miljøer, hvor det pakkede software udrulles på og gøres tilgængelig for testere eller slutbrugere.
 
 
 
+
+Ved åbent software, 
+kan man afmystificere hvordan software er opbygget og hvordan det afvikles.
+
+
 _Lad os bryde disse ned..._
 
-### Kildekoden
+### 1. Kildekoden
 
-Kildekoden er hjertet i ethvert open source-projekt. Den er frit tilgængelig for alle at se, kopiere, ændre og foreslå forbedringer til den oprindelige kode. Denne gennemsigtighed fremmer en samarbejdsmentalitet, der tillader udviklere at lære af hinanden, rette fejl og foreslå nye funktioner.
+Kildekoden består af skriftlige instruktioner til computeren og dette er den rå tilstand af softwaren, før den pakkes og udgives. I åbent software er kildekoden frit tilgængelig som  Open Source og alle kan gennemse, kopiere, ændre og foreslå forbedringer til den oprindelige kode.
 
 - #### Kernen
     **Kernen** er den officielle, stabile, udgivne distribution af softwaren og den, der bruges af størstedelen af brugerne. Et kernehold af vedligeholdere sikrer, at denne kode gennemgås, testes og styres for kvalitet og pålidelighed.
@@ -58,6 +67,8 @@ Kildekoden er hjertet i ethvert open source-projekt. Den er frit tilgængelig fo
 ### Udgivelser
 
 Udgivelser er stabile softwareopdateringer, der gøres tilgængelige med jævne mellemrum. Disse opdateringer er testet og pålidelige til generel brug. Open source-projekter fastsætter deres egne udgivelsesplaner, hvor modne projekter udgiver ofte for at give de nyeste forbedringer og sikkerhedsopdateringer.
+
+### Instanser
 
 
 
