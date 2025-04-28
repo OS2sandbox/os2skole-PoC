@@ -3,7 +3,7 @@
 
 ## 🔒 Lukket software
 ### Begrænset adgang
-Lukket eller properitært software er udviklet af en begrænset gruppe udviklere hos et enkelt firma, og adgang til kildekoden eller indsigt i udviklingsprocesser eller metoder ikke tilgængelig.
+Lukket eller properitært software er udviklet af en begrænset gruppe udviklere hos et enkelt firma, og adgang til kildekoden eller indsigt i udviklingsprocesserne er begrænset.
 
 Anvendere tilbyddes kun én måde at få adgang til softwaren på, hvor alle tilgår og bruger den samme udgave af programmet på præcis samme måde. Dette er en fordel for leverandøren, der kan optimere deres udgifter ved at begrænse leverancen. Man kan sige, at lukket software er designet med leverandørens interesser i tankerne, såsom større kontrol og mere profitable forretningsmodeller.
 
@@ -25,15 +25,22 @@ Som kunde og anvender af et proprietært stykke software er det derfor vigtigt a
 ## 💝 Åben software
 
 ### Fælles udviling og fleksibilitet
-Åbent software er bygget i fællesskab af mange bidragydere. For at dette skal være praktisk muligt, er både kildekode, processer og metoder tilgængelige og transparente. 
+Åbent software er bygget i fællesskab af mange bidragydere. For at dette skal være praktisk muligt, er både kildekode, processer og metoder tilgængelige og transparente. Vil man høste fordelene ved åbent software, skal man derfor have en grundlæggende viden der aktiverer denne åbenhed til fordel for anvenderne. Uden denne grundviden kan åbent software virke uoverskueligt.
 
-For at kunne høste alle fordelene ved åbent software, skal man have en grundlæggende viden om de begreber 
+Åbent software, tillader adskillelse af tre nøglebegreber, som normalt er skjult bag leverandørens mure: kildekoden, udgivelserne og de kørende instanser. Lad os kigge lidt nærmere på de begreber.
 
-Åbent software, tillader adskillelse af tre nøglebegreber, som normalt er skjult bag leverandørens mure: kildekoden, udgivelser og kørende instanser.
+- **🇩🇰 Kildekode / 🇬🇧 Sourcecode:** 
 
-- **Kildekode**: De skriftlige instruktioner til computerprogrammerne. Dette er den rå tilstand af softwaren, der er beregnet til udviklere og sikkerhedsspecialister, før den pakkes til slutbrugerne.
-- **Udgivelser**: Stabile pakkede former af softwaren, klar til at blive sendt og gjort tilgængelig for brugerne. Modne projekter udgiver ofte for at give slutbrugerne de nyeste forbedringer og sikkerhedsopdateringer.
-- **Instanser**: Live-miljøer, hvor softwaren kører og tilgås af brugerne.
+    De skriftlige instruktioner til computerprogrammerne i løsningen. Dette er den "rå" tilstand af softwaren, før den pakkes og leveres i en udgivelse der kan anvendes af slutbrugerne. 
+
+- **🇩🇰 Udgivelse / 🇬🇧 Release:**
+    
+    Stabile pakkede leverancer af softwaren, klar til at blive sendt og gjort tilgængelig for slutbrugerne. Modne projekter udgiver ofte for at give slutbrugerne de nyeste forbedringer og sikkerhedsopdateringer.
+
+**🇩🇰 Instanser / 🇬🇧 Instances:** 
+    Live-miljøer, hvor det pakkede software udrulles på og gøres tilgængelig for testere eller slutbrugere.
+
+
 
 _Lad os bryde disse ned..._
 
