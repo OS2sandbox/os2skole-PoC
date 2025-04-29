@@ -1,5 +1,5 @@
-# Required capabilities for suppliers
-_Suppliers must have the following capabilities to be considered for the project_
+# Supplier Capability Assessment
+_Suppliers must have the following capabilities to be relevant as participants in the project_
 - **Technical Capabilities**: Suppliers should have the technical expertise and resources to meet the project requirements. 
 This includes:
 Proficiency in relevant technologies:
