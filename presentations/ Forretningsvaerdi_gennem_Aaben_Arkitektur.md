@@ -14,7 +14,7 @@ paginate: false
 # Hvordan opnår man:
 
 #
-<!--header: https://opencontainers.org/ - https://helm.sh/ - https://kubernetes.io/ -->
+<!--header: 🐋 https://opencontainers.org/  &nbsp; | &nbsp; ⛵ https://helm.sh/ &nbsp; | &nbsp; ☸️ https://kubernetes.io/ -->
 ![bg blur:2px](https://images.pexels.com/photos/716661/pexels-photo-716661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
 ## 🇪🇺 **Digital suverænitet og handlefrihed**
 🐎 Hastighed via genbrug
@@ -34,6 +34,8 @@ Open Container Initiative + Deployment manifests
 <!-- transition: glow -->
 
 #
+<!--header: https://github.com/moodle | https://gitlab.opencode.de/bmi/opendesk-->
+
 ![bg blur:2px](https://images.pexels.com/photos/716661/pexels-photo-716661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
 🇪🇺 Digital suverænitet og handlefrihed
 ## 🐎 **Hastighed via genbrug**
