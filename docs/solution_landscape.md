@@ -25,7 +25,7 @@ subgraph Learning Platform
         DOC[("Document<br>Sharing<br>System")]
         ED("Office Suite<br>Document<br>Editors")
         SIS(("Student<br>Information<br>System"))
-        PORT("External Course Portal")
+        PORT("External Systems Portal")
       
   end
  end
@@ -42,7 +42,7 @@ end
         n3>"Automation and Policy<br>Management for devices"]
         n4["Policy<br>Store"]
   end
-    PORT --> infra-services --> EXT[["External<br>Course<br>Systems"]]
+    PORT --> infra-services --> EXT[["External<br>Systems"]]
     LMS --> DOC & PORT
     DOC <--> ED
     SIS --> LMS
@@ -53,7 +53,7 @@ end
     Device["Devices"] --> IDB 
     n3 --> Device & n4
     s2 ~~~ s1
-    infrastructure-.-infrastructure-services-.-s1
+    infrastructure-.-infra-services-.-s1
     
     n4@{ shape: cyl}
     Device@{ shape: procs}
