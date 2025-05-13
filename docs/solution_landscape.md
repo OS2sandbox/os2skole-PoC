@@ -3,9 +3,8 @@
 ```mermaid
 flowchart LR
 
-subgraph Learning Platform
 
- subgraph infrastructure-services
+ subgraph infra-services["Common language agnostic infrastructure services"]
     direction TB
       Storage["💾 Storage <br> Service"]~~~
       Messaging["📩 Messaging <br> Service"]
@@ -17,6 +16,8 @@ subgraph Learning Platform
       Config["⚙️ Configuration Service"]
       ID["🛡️ Identity Management"]
  end
+
+subgraph Learning Platform
       
 
  subgraph s1["Applications"]
@@ -41,7 +42,7 @@ end
         n3>"Automation and Policy<br>Management for devices"]
         n4["Policy<br>Store"]
   end
-    PORT --> infrastructure-services --> EXT[["External<br>Course<br>Systems"]]
+    PORT --> infra-services --> EXT[["External<br>Course<br>Systems"]]
     LMS --> DOC & PORT
     DOC <--> ED
     SIS --> LMS
