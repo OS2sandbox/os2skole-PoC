@@ -1,5 +1,5 @@
-# 🎓 sandbox-skole
-Welcome to the **sandbox-skole** repository, a collaborative space for the [OS2Skole project](https://www.os2.eu/os2skole). This repository serves as a foundation for future innovation and development in creating an open-source educational environment.
+# 🎓 os2skole-PoC
+Welcome to the **os2skole-PoC** repository, a collaborative space for the [OS2Skole project](https://www.os2.eu/os2skole). This repository serves as a foundation for future innovation and development in creating an open-source educational environment.
 
 
 ### :bulb: Inspiration
