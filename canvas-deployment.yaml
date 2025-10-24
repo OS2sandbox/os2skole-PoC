@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: canvas-lms
+spec:
+  containers:
+    - name: canvas-web
+      image: instructure/canvas-lms:latest
+      ports:
+        - containerPort: 3000
+          hostPort: 8080
+      env:
+        - name: RAILS_ENV
+          value: "production"
+        - name: POSTGRES_PASSWORD
+          value: "securepassword"
+        - name: REDIS_URL
+          value: "redis://localhost:6379"
+      volumeMounts:
+        - mountPath: /usr/src/app/storage
+          name: canvas-storage
+  volumes:
+    - name: canvas-storage
+      hostPath:
+        path: ./data
+        type: Directory
