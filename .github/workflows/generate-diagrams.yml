@@ -1,0 +1,29 @@
+name: Generate PlantUML Diagrams
+
+# Triggers the workflow on any push event
+on:
+  push:
+
+# Sets permissions for the GITHUB_TOKEN to allow the action to commit and push changes
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out the repository under $GITHUB_WORKSPACE, so the job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Uses the PlantUML action to generate SVG diagrams and commit them
+      - name: Generate PlantUML diagrams
+        uses: grassedge/generate-plantuml-action@v1.5
+        with:
+          # The path to the directory containing the PlantUML files
+          path: docs/diagrams
+          # The commit message for the generated diagrams
+          message: "Auto-generate PlantUML diagrams"
+        env:
+          # Provide the GITHUB_TOKEN to allow the action to commit to the repository
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
