@@ -1,0 +1,60 @@
+@startuml
+!include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title File Drive Deployment, from a vendor's perspective
+
+' Define custom tag for dashed lines
+AddRelTag("dashed", $lineStyle = DashedLine())
+
+' External
+Person(user, "User")
+System_Ext(iam, "OS2Skole IAM")
+System_Ext(office, "Cloud Office Suite")
+System_Ext(lms, "Learning Management System")
+System_Ext(monitor, "OS2Skole Monitoring")
+System_Ext(cicd, "OS2Skole CI/CD", "See 'CI/CD Pipeline' diagram on more details.")
+
+' Main Enterprise Boundary
+Enterprise_Boundary(cloud_drive, "Cloud Drive") {
+    
+    Boundary(prod, "Production Environment", "Logical Unit") {
+        System(cluster, "Cloud Drive Cluster", "System is configured to ensure confidentiality, integrity, availability")
+        System(av, "Antivirus")
+        System(backup, "Data Backup")
+    }
+
+    Boundary(ops_unit, "Deployment Operations", "Logical Unit") {
+        System(vcs, "Version Control System")
+        System(controller, "Deployment Controller")
+        System(test_env, "On-Demand Test Environments", "Configurations of the Cloud Drive Cluster")
+    }
+}
+
+' Relationships
+
+' User interactions
+Rel(user, iam, "accesses portal provided by")
+
+' Connect Cluster to External Systems (Left & Top)
+Rel(cluster, iam, "pulls auth flow information from")
+BiRel(cluster, office, "exchange document file data")
+Rel(cluster, lms, "pulls document information from & pushes file shares to")
+Rel(cluster, monitor, "pushes logs to & pushes monitoring data to & pushes SBOM/CVE data to & pushes audit traces to")
+
+' Cluster internal connections
+Rel(cluster, av, "queries")
+Rel(cluster, backup, "pushes file and user data to")
+
+' Deployment Controller interactions
+Rel(controller, cluster, "performs rollout of")
+
+' CI/CD Pipeline flow
+Rel(vcs, cicd, "sends webhook indicating version update")
+Rel(cicd, vcs, "pulls environment information")
+Rel(cicd, controller, "requests update rollout")
+Rel(cicd, test_env, "requests test environments & sends web requests to")
+
+Rel(controller, vcs, "fetches configuration code from",)
+Rel(controller, test_env, "ensures provisioning and destruction of")
+
+@enduml

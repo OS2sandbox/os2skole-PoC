@@ -1,0 +1,8 @@
+upstream
+flake.nix
+flake.lock
+.envrc
+*.bkp
+.local
+.direnv
+.aider*
