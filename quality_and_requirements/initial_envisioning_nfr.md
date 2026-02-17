@@ -2,9 +2,11 @@
 
 This is a draft of potential non-functional requirements created during a previous session. This document is meant as a discussion starter for conversations about our priorities and potential technical challenges.
 
-**DO NOT:** Use the provided requirements and numbers as a "shopping list" of validated specifications. We might currently envision that the maximum acceptable data loss is 30 minutes (as written below), but we may later find that 1 hour, 4 hours, or even 4 days is acceptable.
+**DO NOT:** Use the provided requirements and numbers as a "shopping list" of validated specifications.  
+We might currently envision that the maximum acceptable data loss is 30 minutes (as written below), but we may later find that 1 hour, 4 hours, or even 4 days is acceptable.
 
-**DO:** Think about which design decisions might need to be made to address the challenges indicated by this document. Are you suggesting a design decision that makes it impossible to later limit the maximum data loss to 30 minutes, if should we decide to go with that number? This might be a problem.
+**DO:** Think about which challanges are implied by this document. Are your design decisions compatible with them?
+Are you suggesting a design decision that makes it _impossible_ to later limit the maximum data loss to 30 minutes? This might be a problem.
 
 ### Functionality
 **Access, Security, and Auditing**
