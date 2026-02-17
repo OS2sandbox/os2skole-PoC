@@ -8,9 +8,9 @@ We draw inspiration from the insightful discussions at FOSDEM. For an enlighteni
 
 ### :world_map: High-level Architecture
 
-For an overview of the proposed loosely coupled architecture, please refer to our detailed documentation in [architecture.md](./docs/architecture.md). 
+For an overview of the proposed loosely coupled architecture, please refer to our detailed documentation in [architecture.md](./top_level_design/architecture.md).
 
-A 🇩🇰 danish expanded version resides here: [Rammearkitektur](./docs/rammearkitektur_l%C3%A6ringsplatform.md)
+A 🇩🇰 danish expanded version resides here: [Rammearkitektur](./top_level_design/rammearkitektur_l%C3%A6ringsplatform.md)
 
 
 ### :handshake: Contributing
