@@ -1,0 +1,86 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title OS2Skole System Landscape
+
+' --- Top Left: End User System Group ---
+Boundary(b_enduser, "End User System") {
+    System_Ext(mdm, "MDM")
+    System_Ext(lst, "LST Software")
+    System_Ext(local_os, "Local System OS")
+    
+    Person_Ext(user, "End User", "For example a student, teacher or parent.")
+}
+
+' --- Middle Left: Identity Providers ---
+System_Ext(idp, "Identity Providers (multiple)", "For example EasyIQ or UniLogin")
+
+' --- Top Right: Administrators ---
+' Placed outside boundaries as per diagram
+Person(admin1, "OS2Skole Administrator")
+Person(admin2, "OS2Skole Administrator")
+
+' --- Middle Center: Partners/External Apps ---
+System_Ext(partners, "External user-facing applications (multiple)", "e.g., SkoleGPT, Aula, MinUddannelse, MeeBook, Gyldendal/Alinea portals, SkoleTube")
+
+' --- Middle Right: Delivery Platform ---
+Boundary(b_delivery, "OS2Skole Delivery Platform") {
+    System(audit, "Auditing & Monitoring Platform")
+    System(deploy, "Test & Deployment Platform", "Includes Version Control System, 🔍 see deployment diagram.")
+}
+
+' --- MAIN BLOCK: OS2Skole Service ---
+Boundary(b_service, "OS2Skole Service") {
+    
+    ' Merged Core Identity & Access Services
+    System(iam_services, "Identity & Access Services", "🔍 See 'identity and access architecture' diagram.")
+
+    ' Sub-group: User Facing Internal Apps
+    Boundary(b_int_apps, "Internal user-facing applications", "configured with Danish localization and OS2skole-specific theming.") {
+        System(classroom, "Classroom Management System")
+        System(cloud, "Cloud Drive", "🔍 see Cloud Drive from a supplier's perspective diagram.")
+        System(groupware, "Groupware UI")
+        System(web_build, "Websuite builder")
+        System(meet, "Video Meeting Platform")
+    }
+
+    ' Sub-group: Office/Utility Services
+    Boundary(b_utility, "Backing Services") {
+        System(office, "Office Suite", "based on interoperable protocols")
+        System(share, "File Share System", "based on interoperable protocols")
+        System(cal, "Calendar service", "based on interoperable protocols")
+        System(email, "Email service", "based on interoperable protocols")
+        System(addr, "Address Book Service", "based on interoperable protocols")
+        System(cal_conv, "Calendar Converter")
+    }
+}
+
+' --- Bottom: External Data Services ---
+System_Ext(skole_data, "Skolegrunddata Service")
+System_Ext(ext_cal_serv, "External Calendar Service")
+
+' Relationships
+BiRel(user, local_os, "Interacts")
+Rel(local_os, iam_services, "")
+Rel(mdm, local_os, "provisions")
+Rel(local_os, lst, "requests information from")
+BiRel(iam_services, idp, "")
+BiRel(admin1, audit, "reviews")
+BiRel(admin2, deploy, "reviews")
+BiRel(partners, iam_services, "")
+BiRel(b_int_apps, iam_services, "")
+BiRel(iam_services, b_int_apps, "")
+BiRel(iam_services, partners, "")
+Rel(b_int_apps, b_utility, "requests information and actions", "(apps to backends)")
+BiRel(cloud, office, "Exchange Information")
+Rel(iam_services, skole_data, "")
+BiRel(b_service, audit, "sends audit traces, logs and telemetry to")
+Rel(deploy, b_service, "Rolls out updates of")
+Rel(cal_conv, cal, "informed about updated events")
+Rel(cal, cal_conv, "requests calendar data")
+Rel(ext_cal_serv, cal_conv, "informs about updated events")
+Rel(cal_conv, ext_cal_serv, "requests calendar data")
+Rel(iam_services, addr, "")
+Rel(classroom, partners, "requests information about user content (specific systems)")
+
+@enduml
