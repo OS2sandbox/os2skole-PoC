@@ -5,7 +5,8 @@ This diagram provides a high-level overview of the system components.
 ![C4 System Landscape Diagram](./diagram_data/system_landscape_diagram.svg)
 
 ## Context
-**Date:** Dec 17, 2025, **Author:** [@0xf1e](https://github.com/0xf1e), **Discussion:** https://github.com/OS2sandbox/os2skole-PoC/pull/46
+**Date:** Dec 17, 2025, **Author:** [@0xf1e](https://github.com/0xf1e)  
+**Discussion Participants:** Input from [@janhalen](https://github.com/janhalen), https://github.com/OS2sandbox/os2skole-PoC/pull/46
 
 **Originally intended Audience and Purpose:**  
 
