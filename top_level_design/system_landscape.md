@@ -8,8 +8,9 @@ This diagram provides a high-level overview of the system components.
 **Date:** Dec 17, 2025, **Author:** https://github.com/0xf1e, **Discussion:** https://github.com/OS2sandbox/os2skole-PoC/pull/46
 
 **Originally intended Audience and Purpose:**  
-(a) For our own team: Outline the project's technical requirements.  
-(b) For external partners and stakeholders: Outline the overall scope and integration points.
+
+* Our own team: "We want to see all system components on one diagram, so that we can better evaluate what kinds of partnerships we need to reach out for."
+* Potential technology partners: "We want to see where our own work and skills can fit into the OS2Skole project."
 
 ## Implied Decisions
 
