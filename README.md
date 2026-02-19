@@ -8,17 +8,24 @@ We draw inspiration from the insightful discussions at FOSDEM. For an enlighteni
 
 ### :world_map: High-level Architecture
 
-For an overview of the proposed loosely coupled architecture, please refer to our detailed documentation in [architecture.md](./top_level_design/architecture.md).
+We are currently in the process of collecting and clarifying documentation that has been created in various contexts.
 
-A 🇩🇰 danish expanded version resides here: [Rammearkitektur](./top_level_design/rammearkitektur_l%C3%A6ringsplatform.md)
+As of today (Feb 19th 2026), you, the engineer, are able to get a first insight into this project by looking at the following files:
 
+- [Architecture Communication Canvas](./top_level_design/architecture_communication_canvas.md)
+- [Teaching Platform Architecutre Framework (Danish)](./top_level_design/rammearkitektur_l%C3%A6ringsplatform.md)
+- [Overall C4 System Landscape](./top_level_design/system_landscape.md)
+- [Development Guidelines (Danish)](./people_and_processes/udviklings_manual_dk.md)
+- [Invitial Envisioning of Non-Functional Requirements](./quality_and_requirements/initial_envisioning_nfr.md)
+
+If you are looking for further elaboration, your first step might be to look at the [FDA Architecture Matrix](./top_level_design/fda_perspective/FDAarkitekturproduktreol.md).
 
 ### :handshake: Contributing
 
 We welcome contributions to this project! If you would like to contribute, please use one of these methods:
 
 1. **Submit a Pull Request (PR):** You can share your contributions by submitting a pull request. We encourage you to provide a clear description of your changes.
-
 2. **Create an issue:**: Go to our [issue-tracker](https://github.com/OS2sandbox/sandbox-skole/issues) and create an issue.
-
 3. **Contact Us:** If you have specific questions regarding your contributions, please feel free to reach out via email at os2@os2.eu. We are happy to discuss your ideas and provide assistance.
+
+If you are new to a Git-based workflow, you may also profit from the [training material we have collected](./SUPPORT.md).
