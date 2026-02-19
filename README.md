@@ -27,3 +27,5 @@ We welcome contributions to this project! If you would like to contribute, pleas
 1. **Submit a Pull Request (PR):** You can share your contributions by submitting a pull request. We encourage you to provide a clear description of your changes.
 2. **Create an issue:**: Go to our [issue-tracker](https://github.com/OS2sandbox/sandbox-skole/issues) and create an issue.
 3. **Contact Us:** If you have specific questions regarding your contributions, please feel free to reach out via email at os2@os2.eu. We are happy to discuss your ideas and provide assistance.
+
+If you are new to a Github-based workflow, you may also profit from the [training material we have collected](./SUPPORT.md).
