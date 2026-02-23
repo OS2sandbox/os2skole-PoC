@@ -1,23 +1,8 @@
-# 🎒 Os2Skole
-## Identity and Acess Management
+# Identity and Access Management: C4 System Diagram
 
 The Os2Skole Identity and Access Management (IAM) architecture is engineered to deliver a secure, scalable, and operationally efficient platform. This C4 system diagram illustrates the core components and their strategic relationships within the broader Os2Skole ecosystem and external services.
 
-The core architecture is built on **six strategic pillars** to ensure reliability, security, and low operational cost:
-
-| Strategic Pillar | Implementation Detail | Benefit |
-| :--- | :--- | :--- |
-| **Modularity** | An IAM service **implementing standard OpenID Connect** acts as a **separate, centralized Identity Provider** for the applications. | Loose Coupling of applications from identity logic. Reduced vendor lock-in. |
-| **Vendor Neutrality** | Utilizes a **best of breed Open Source solution**. | Reduced licensing costs and reduced risk of vendor lock-in. |
-| **Open Source Value** | Focus on **reuse** of existing open source solutions and potential **upstream contributions** |  Fosters community feedback and improves core platform quality. |
-| **Exit Strategy** | *TBD* | Insulation from technology change risks; low-cost provider transition. |
-| **Security** | **Security by Design** enforced via centralized IAM controls. | Consistent authentication and authorization across all applications. |
-| **Maintainability** | Declaratively configured components.  | Simplified deployments and low-cost maintenance. |
-
-This architecture delivers a **secure, adaptable, and sustainable** IAM platform by prioritizing standards, openness, and strategic separation of concerns.
-
----
-
+## Context
 
 ```mermaid
 C4Context
@@ -66,3 +51,26 @@ Enterprise_Boundary(STILBoundary, "External person data providers") {
   
   UpdateLayoutConfig($c4ShapeInRow="2")
 ```
+
+## Context
+**Date**: Dec 17, 2025, **Author:** [@janhalen](https://github.com/janhalen), [@0xf1e](https://github.com/0xf1e)  
+**Discussion Participants:** original diagram by @janhalen, minor adjustments by @0xf1e, https://github.com/OS2sandbox/os2skole-PoC/pull/42
+
+**Originally intended Audience and Purpose:**
+
+* Our own team: "We want to identify and manage potential challenges in Identity & Access Management at an early stage, and we want to be able to seek vendor feedback on whether our design is viable."
+
+## Implied Decisions
+
+The core architecture is built on **six strategic pillars** to ensure reliability, security, and low operational cost:
+
+| Strategic Pillar | Implementation Detail | Benefit |
+| :--- | :--- | :--- |
+| **Modularity** | An IAM service **implementing standard OpenID Connect** acts as a **separate, centralized Identity Provider** for the applications. | Loose Coupling of applications from identity logic. Reduced vendor lock-in. |
+| **Vendor Neutrality** | Utilizes a **best of breed Open Source solution**. | Reduced licensing costs and reduced risk of vendor lock-in. |
+| **Open Source Value** | Focus on **reuse** of existing open source solutions and potential **upstream contributions** |  Fosters community feedback and improves core platform quality. |
+| **Exit Strategy** | *TBD* | Insulation from technology change risks; low-cost provider transition. |
+| **Security** | **Security by Design** enforced via centralized IAM controls. | Consistent authentication and authorization across all applications. |
+| **Maintainability** | Declaratively configured components.  | Simplified deployments and low-cost maintenance. |
+
+This architecture delivers a **secure, adaptable, and sustainable** IAM platform by prioritizing standards, openness, and strategic separation of concerns.
