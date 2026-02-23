@@ -1,6 +1,6 @@
 # Iterative Development Strategy
 
-**Executive Summary:** We propose a risk-driven, iterative development strategy designed to validate success early and minimize failure points. Instead of developing component-by-component, the project will proceed in four "sprints," each resulting in a runnable, cross-sectional functional prototype. This approach ensures that high-risk requirements—such as IAM integration and deployment infrastructure—are addressed immediately.
+**Executive Summary:** We propose a risk-driven, iterative development strategy to validate success early and minimize failure points. Instead of developing component-by-component, we will work in four "sprints," each resulting in an end-to-end prototype. This ensures that high-risk items like IAM integration and deployment are handled up front.
 
 ## Context
 
@@ -48,14 +48,16 @@ Note: This approach requires a larger secretariat than a predictive ("waterfall"
 
 ### Progress so far
 
-In our meeting today, we were unable to write user stories for the entire project; we only had time to focus on the IAM integration, as it is the highest risk area.
-You can see our user stories attached as sub-issues to this issue.
+During our workshop on Dec 1, 2025, we wrote key user stories for the IAM integration. We focused here because it represents a high risk. However, there are other high-risk areas we should examine, such as the calendar integration (read-only Outlook calendars might cause unexpected issues), and the delivery (CI/CD) setup.
 
-Ideally, we would take the time to write user stories for the entire project. For example, calendar integration requires early feedback because it is high-risk; read-only Outlook calendars might cause unexpected issues. We should also identify which parts of the test suite integration are riskiest. Ideally, we would identify high-risk requirements across the entire project. This would then determine which features go into the first "Amsterdam" prototype.
+However, trying to map out the entire system ahead of time might not be necessary. In Software Engineering, we categorize User Stories by their granularity, from most high-level to most granular: Theme, Epic, User Story, Task (see this [introductory text](https://www.visual-paradigm.com/scrum/theme-epic-user-story-task/)).
 
-Better yet, if we have the resources, we would do this in collaboration with student and teacher representatives. Identifying requirements as user stories is collaborative. By asking "Why do we need this?" and "What exactly do users need?", we uncover many open problems.
-This process is fairly time-consuming, however. For reference, just the 7 items linked in this issue took us 2 hours. If we map the entire OS2Skole program like we did for IAM, I expect it to take at least 10 hours.
+We should (and already have) identify themes ahead of time, and we should be identifying epics for the higher-risk themes. For particularly high-risk epics, we might even want to get to the user story level. This would then determine which epics go into the first "Amsterdam" prototype. Meanwhile, for lower-risk themes, it is acceptable (and preferable) to figure out the details as we prepare for each sprint.
 
-We need to determine what to specify during procurement to ensure the kind of cooperation we desire. We can find examples in documentation from other public projects that used iterative development. See: https://github.com/OS2sandbox/os2skole-PoC/issues/33
+Ideally, this would be done in collaboration with student and teacher representatives, provided we have the resources. Identifying requirements as user stories is meant to be collaborative. By asking "Why do we need this?" and "What exactly do users need?", we can uncover many open problems.
 
-We might take inspiration from the technical oversight committee used by the CNCF (https://github.com/cncf/toc).
+This process is fairly time-consuming, however. For reference, the 7 epics associated with the IAM system took us 2 hours. If we invite domain experts on workshops on high-risk epics, we should schedule at least 4 hours per workshop.
+
+Finally, I want to note a challenge we have not been able to address yet: We must determine what to specify during procurement to ensure our desired form of cooperation. We can find examples in documentation from [other public projects that used iterative development](https://github.com/OS2sandbox/os2skole-PoC/issues/33).
+
+We could take inspiration from the CNCF's [technical oversight committee](https://github.com/cncf/toc).
