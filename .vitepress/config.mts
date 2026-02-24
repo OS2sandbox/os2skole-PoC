@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from "vitepress-plugin-mermaid"
+import { configureDiagramsPlugin } from 'vitepress-plugin-diagrams'
 
 // https://vitepress.dev/reference/site-config
 export default withMermaid({
@@ -12,6 +13,15 @@ export default withMermaid({
     ':path1/:path2/README.md': ':path1/:path2/index.md',
     ':path1/:path2/:path3/README.md': ':path1/:path2/:path3/index.md',
     ':path1/:path2/:path3/:path4/README.md': ':path1/:path2/:path3/:path4/index.md'
+  },
+  markdown: {
+    config: (md) => {
+      configureDiagramsPlugin(md, {
+        diagramsDir: "public/diagrams",
+        publicPath: "/os2skole-PoC/diagrams",
+        krokiServerUrl: "https://kroki.io",
+      });
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
