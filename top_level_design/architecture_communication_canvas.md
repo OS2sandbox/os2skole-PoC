@@ -1,5 +1,5 @@
 # OS2Skole Architecture Communication Canvas
-*System: OS2Skole | Created by: @0xf1e | Date/Iteration: January 20th, 2026, first proposal*
+*System: OS2Skole | Created by: @0xf1e | Date/Iteration: February 24th, 2026*
 
 ## Value Proposition 💼
 
@@ -25,17 +25,15 @@
 
 ## Quality Requirements ⭐️
 
-Terms are used as defined in the [ISO 25010 standard](https://iso25000.com/index.php/en/iso-25000-standards/iso-25010).
-
-- Security (*Why?* We want student data to be safe, and actions in the system to be accountable and without repudiation.)
-- Elasticity/Capacity (*Why?* We want the system to stay responsive under exam situations.)
-- Learnability/Usability (*Why?* We want end users to be able to use the system with little external support.)
-- Compatibility (*Why?* We do not want to get locked into specific providers' unique solutions.)
-- Recoverability (*Why?* We want students to be able to trust that their work does not get lost.)
-- Maintainability (*Why?* We want to run this project for a long time, with changing staff and changing requirements.)
-- Legal compliance
+- [Security](https://quality.arc42.org/qualities/security) (*Why?* Student data must be safe. Actions in the sytem must be accountable without repudiation.)
+- [Composability](https://quality.arc42.org/qualities/composability) (*Why?* We do not want to get locked into providers' integrated or bespoke solutions.)
+- Ease-of-use ([Learnability](https://quality.arc42.org/qualities/learnability)) (*Why?* End-users must be able to use the system with only little external support.)
+- [Elasticity](https://quality.arc42.org/qualities/elasticity) (*Why?* The system must stay responsive under exam situations.)
+- [Accessibility](https://quality.arc42.org/qualities/accessibility) (*Why?* All students in a class must be able to use the system.)
+- [Operability](https://quality.arc42.org/qualities/operability) (*Why?* We want to run this project for a long time, with changing staff and changing modules.)
 
 ## Business Context 🔗
+
 Users access the system via web browsers. The system interfaces with Identity Providers (EasyIQ, UniLogin, etc.) and Skolegrunddata. The main portal redirects to external user-facing applications, while internal components (like the classroom management system) pull data from these external applications via APIs.
 
 ```mermaid
@@ -69,7 +67,7 @@ graph LR
 
 ## Components / Modules 🧊
 
-Proposed Logical Components: 
+Envisioned Logical Components: 
 
 - Application access portal
 - Document sharing
@@ -81,7 +79,7 @@ Proposed Logical Components:
 - Teacher exercise assignment
 - Student exercise submission
 
-Proposed Infrastructure Component Groups:
+Envisioned Infrastructure Component Groups:
 
 - Observability (like Auditing, Monitoring, Metrics, Incidents)
 - Test Suite (like End2End, Integration, Load, Accessibility)
