@@ -17,24 +17,7 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Top Level Design', link: '/top_level_design/README.md' },
-      { text: 'Quality & Requirements', link: '/quality_and_requirements/README.md' },
-      { text: 'Managing Risk', link: '/managing_risk/README.md' },
-      { text: 'People & Processes', link: '/people_and_processes/README.md' },
-      { text: 'Component Development', link: '/component_development/README.md' },
-      { text: 'Global Decisions', link: '/global_decisions/README.md' }
-    ],
-
     sidebar: [
-      {
-        text: 'Getting Started',
-        items: [
-          { text: 'README', link: '/README.md' },
-          { text: 'SUPPORT', link: '/SUPPORT.md' }
-        ]
-      },
       {
         text: 'Top Level Design',
         collapsed: false,
