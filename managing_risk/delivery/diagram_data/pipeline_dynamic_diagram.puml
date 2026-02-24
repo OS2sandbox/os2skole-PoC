@@ -23,7 +23,7 @@ BiRel(delivery_all_vendors_nego, os2skole_2_test_prep, "negotiate deployment of 
 
 ' --- Step 2: Testing & Outcome ---
 Boundary(step2, "2. Testing & Outcome", $type="Step") {
-    System(os2skole_3_update, "Delivery (OS2Skole)", "Runs test suite, comprising Integration Tests, System Tests, Load Tests, Accessibility Tests, and potentially others")
+    System(os2skole_3_update, "Delivery (OS2Skole)", "Runs test suite, which could comprise End2End Tests, Integration Tests, Load Tests, Accessibility Tests, etc.")
     System_Ext(delivery_all_vendors_outcome, "Delivery (All Vendors)", "")
     ContainerDb(prod_decl, "OS2Skole Production Declaration", "System Declaration", "Declaration that describes all expected components of the OS2Skole system")
 }
