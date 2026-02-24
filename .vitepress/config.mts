@@ -8,10 +8,10 @@ export default defineConfig({
   description: "Architecture, Design and Technical Decisions regarding the OS2Skole project",
   rewrites: {
     'README.md': 'index.md',
-    ':path/README.md': ':path/index.md',
-    ':path/:path/README.md': ':path/:path/index.md',
-    ':path/:path/:path/README.md': ':path/:path/:path/index.md',
-    ':path/:path/:path/:path/README.md': ':path/:path/:path/:path/index.md'
+    ':path1/README.md': ':path1/index.md',
+    ':path1/:path2/README.md': ':path1/:path2/index.md',
+    ':path1/:path2/:path3/README.md': ':path1/:path2/:path3/index.md',
+    ':path1/:path2/:path3/:path4/README.md': ':path1/:path2/:path3/:path4/index.md'
   },
   markdown: {
     config: (md) => {
