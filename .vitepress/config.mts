@@ -13,7 +13,7 @@ export default defineConfig({
     config: (md) => {
       configureDiagramsPlugin(md, {
         diagramsDir: "public/diagrams",
-        publicPath: "/diagrams",
+        publicPath: "/os2skole-PoC/diagrams",
         krokiServerUrl: "https://kroki.io",
       });
     },
