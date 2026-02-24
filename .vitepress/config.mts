@@ -20,7 +20,6 @@ export default withMermaid({
         diagramsDir: "public/diagrams",
         publicPath: "/os2skole-PoC/diagrams",
         krokiServerUrl: "https://kroki.io",
-        excludedDiagramTypes: ["mermaid"],
       });
     },
   },
