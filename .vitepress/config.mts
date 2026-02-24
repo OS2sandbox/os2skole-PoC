@@ -1,9 +1,19 @@
 import { defineConfig } from 'vitepress'
+import { configureDiagramsPlugin } from 'vitepress-plugin-diagrams'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "OS2Skole",
   description: "Architecture, Design and Technical Decisions regarding the OS2Skole project",
+  markdown: {
+    config: (md) => {
+      configureDiagramsPlugin(md, {
+        diagramsDir: "public/diagrams",
+        publicPath: "/diagrams",
+        krokiServerUrl: "https://kroki.io",
+      });
+    },
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
