@@ -6,6 +6,9 @@ export default defineConfig({
   base: '/os2skole-PoC/',
   title: "OS2Skole",
   description: "Architecture, Design and Technical Decisions regarding the OS2Skole project",
+  rewrites: {
+    'README.md': 'index.md'
+  },
   markdown: {
     config: (md) => {
       configureDiagramsPlugin(md, {
