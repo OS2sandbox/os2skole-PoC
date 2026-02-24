@@ -2,7 +2,6 @@
 
 This diagram illustrates the automated test and delivery pipeline from OS2Skole administration's perspective. It shows the workflow for patches and minor updates within the system.
 
-```plantuml
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
@@ -52,7 +51,6 @@ Rel(os2skole_4_rollout, prod_env, "performs rollout of new configuration of")
 
 
 @enduml
-```
 
 ## Context
 **Date:** Dec 17, 2025, **Author:** [@0xf1e](https://github.com/0xf1e)  
