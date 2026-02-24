@@ -7,7 +7,7 @@ export default defineConfig({
   title: "OS2Skole",
   description: "Architecture, Design and Technical Decisions regarding the OS2Skole project",
   rewrites: {
-    ':path*/README.md': ':path*/index.md'
+    '{-:path*}/README.md': '{-:path*}/index.md'
   },
   markdown: {
     config: (md) => {
