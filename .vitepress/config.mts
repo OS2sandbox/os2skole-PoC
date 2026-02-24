@@ -1,9 +1,8 @@
 import { defineConfig } from 'vitepress'
-import { withMermaid } from "vitepress-plugin-mermaid"
-import { configureDiagramsPlugin } from 'vitepress-plugin-diagrams'
+import { markdownItGenerateDiagramsPlugin, viteGenerateDiagramsPlugin } from 'vitepress-plugin-kroki'
 
 // https://vitepress.dev/reference/site-config
-export default withMermaid({
+export default defineConfig({
   base: '/os2skole-PoC/',
   title: "OS2Skole",
   description: "Architecture, Design and Technical Decisions regarding the OS2Skole project",
@@ -16,13 +15,18 @@ export default withMermaid({
   },
   markdown: {
     config: (md) => {
-      configureDiagramsPlugin(md, {
+      markdownItGenerateDiagramsPlugin(md, {
         diagramsDir: "public/diagrams",
+        diagramsDistDir: "diagrams",
         publicPath: "/os2skole-PoC/diagrams",
-        krokiServerUrl: "https://kroki.io",
-        excludedDiagramTypes: ["mermaid"],
+        krokiBaseUrl: "https://kroki.io",
       });
     },
+  },
+  vite: {
+    plugins: [
+      viteGenerateDiagramsPlugin()
+    ]
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
