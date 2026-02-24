@@ -3,6 +3,7 @@ import { configureDiagramsPlugin } from 'vitepress-plugin-diagrams'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/os2skole-PoC/',
   title: "OS2Skole",
   description: "Architecture, Design and Technical Decisions regarding the OS2Skole project",
   markdown: {
