@@ -2,6 +2,7 @@
 
 This diagram provides a high-level overview of the system components.
 
+```plantuml
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
@@ -88,6 +89,7 @@ Rel(iam_services, addr, "")
 Rel(classroom, partners, "requests information about user content (specific systems)")
 
 @enduml
+```
 
 ## Context
 **Date:** Dec 17, 2025, **Author:** [@0xf1e](https://github.com/0xf1e)  
