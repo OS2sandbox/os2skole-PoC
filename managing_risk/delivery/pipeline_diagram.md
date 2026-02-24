@@ -11,6 +11,7 @@ This diagram illustrates the automated test and delivery pipeline from OS2Skole 
 **Originally intended Audience and Purpose:**
 
 * Fie (architect role): "I want to be sure that the rollout of updates can be done the way I am envisioning, so that the components that I recommend make sense. I want other CI/CD experts to be able to give their input."
+* Our team: "We want hypothetical suppliers to be able to determine, if they can integrate with our delivery system. We want to give them the chance to give feedback so we can adjust to their needs."
 
 ## Implied Decisions
 
