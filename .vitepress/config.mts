@@ -26,7 +26,7 @@ export default defineConfig({
         text: 'Top Level Design',
         collapsed: false,
         items: [
-          { text: 'Overview', link: '/top_level_design/README.md' },
+          { text: 'Overview', link: '/top_level_design/' },
           { text: 'Architecture', link: '/top_level_design/architecture.md' },
           { text: 'Architecture Communication Canvas', link: '/top_level_design/architecture_communication_canvas.md' },
           { text: 'System Landscape', link: '/top_level_design/system_landscape.md' },
@@ -53,20 +53,20 @@ export default defineConfig({
         text: 'Quality & Requirements',
         collapsed: false,
         items: [
-          { text: 'Overview', link: '/quality_and_requirements/README.md' },
+          { text: 'Overview', link: '/quality_and_requirements/' },
           { text: 'Initial Envisioning NFR', link: '/quality_and_requirements/initial_envisioning_nfr.md' },
-          { text: 'Accessibility', link: '/quality_and_requirements/accessibility/README.md' },
-          { text: 'Composability', link: '/quality_and_requirements/composability/README.md' },
-          { text: 'Ease of Use', link: '/quality_and_requirements/ease_of_use/README.md' },
-          { text: 'Operability', link: '/quality_and_requirements/operability/README.md' },
-          { text: 'Security', link: '/quality_and_requirements/security/README.md' }
+          { text: 'Accessibility', link: '/quality_and_requirements/accessibility/' },
+          { text: 'Composability', link: '/quality_and_requirements/composability/' },
+          { text: 'Ease of Use', link: '/quality_and_requirements/ease_of_use/' },
+          { text: 'Operability', link: '/quality_and_requirements/operability/' },
+          { text: 'Security', link: '/quality_and_requirements/security/' }
         ]
       },
       {
         text: 'Managing Risk',
         collapsed: false,
         items: [
-          { text: 'Overview', link: '/managing_risk/README.md' },
+          { text: 'Overview', link: '/managing_risk/' },
           { 
             text: 'Delivery',
             collapsed: true,
@@ -88,7 +88,7 @@ export default defineConfig({
         text: 'People & Processes',
         collapsed: false,
         items: [
-          { text: 'Overview', link: '/people_and_processes/README.md' },
+          { text: 'Overview', link: '/people_and_processes/' },
           { text: 'Iterative Development', link: '/people_and_processes/iterative_development.md' },
           { text: 'Udviklings Manual (DK)', link: '/people_and_processes/udviklings_manual_dk.md' }
         ]
@@ -97,15 +97,15 @@ export default defineConfig({
         text: 'Component Development',
         collapsed: false,
         items: [
-          { text: 'Overview', link: '/component_development/README.md' },
-          { text: 'IAM', link: '/component_development/iam/README.md' }
+          { text: 'Overview', link: '/component_development/' },
+          { text: 'IAM', link: '/component_development/iam/' }
         ]
       },
       {
         text: 'Global Decisions',
         collapsed: false,
         items: [
-          { text: 'Overview', link: '/global_decisions/README.md' }
+          { text: 'Overview', link: '/global_decisions/' }
         ]
       }
     ],
