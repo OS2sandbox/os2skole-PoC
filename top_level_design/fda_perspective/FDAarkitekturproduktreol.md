@@ -5,7 +5,7 @@ Dette dokument adresserer, hvordan en formaliseret rammearkitektur – som den f
 
 Arkitekturprodukter udstilles i et **åbent, versionsstyret repositorie**. Dokumentationen følger principperne i `FDA arkitekturreolen` og realiseres ved at beskrive diagrammer vha. `C4-modellen` og levere dem direkte i åbne versionstyrbare standard-formater som f.eks `Mermaid` i `Markdown`. Denne tilgang sikrer, at arkitekturbeskrivelserne er tæt integreret med koden og understøtter en hurtig, iterativ udvikling.
 
-_En mere dybdegående beskrivelse af strategien for arkitekturcompliance er beskrevet seperat her: [Planlagt arkitektur compliance](./top_level_design/fda_perspective/arkitektur_compliance.md)_
+_En mere dybdegående beskrivelse af strategien for arkitekturcompliance er beskrevet seperat her: [Planlagt arkitektur compliance](./arkitektur_compliance.md)_
 
 <br>
 
