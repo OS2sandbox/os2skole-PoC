@@ -49,7 +49,7 @@ export default withMermaid({
         items: [
           { text: 'Overview', link: '/quality_and_requirements/' },
           { text: 'Initial Envisioning NFR', link: '/quality_and_requirements/initial_envisioning_nfr.md' },
-          { text: 'Addressing High Demand', '/quality_and_requirements/elasticity.md'}
+          { text: 'Addressing High Demand', link: '/quality_and_requirements/elasticity.md' },
           { text: 'Accessibility', link: '/quality_and_requirements/accessibility/' },
           { text: 'Composability', link: '/quality_and_requirements/composability/' },
           { text: 'Ease of Use', link: '/quality_and_requirements/ease_of_use/' },
