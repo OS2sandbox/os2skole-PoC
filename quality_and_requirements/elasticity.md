@@ -6,26 +6,27 @@ A summary of suggestions is available at the [bottom of this document](#4-summar
 
 ## 1. The Challenge
 
-A digital platform for schools needs to handle situations where hundreds or thousands of students use it at the same time. Designing for this is the problem of *elasticity*: how do we build a system that scales with demand, handles traffic spikes gracefully, and recovers from unexpected failure?
+Our digital platform for schools likely needs to handle situations where thousands of students use it at the same time. Designing for this is the problem of *elasticity*: how do we build a system that scales with demand, handles traffic spikes gracefully, and recovers from unexpected failure?
 
-A school platform faces demand that is tied to the rhythm of the school day, the school year, and specific events. The following scenarios are ones I have identified so far, though this is not an exhaustive list:
+A school platform faces demand that is tied to the rhythm of the school day, the school year, and specific events. The following is a non-exhaustive list of scenarios that may pose a risk:
 
-**Exams.** In the eighth and ninth grades, Danish elementary schools have a structured exam season — for example, in 2025 there was a winter exam period from December 1 to December 9.[^1] If students take exams on the same platform they use day-to-day, this creates a predictable but significant spike. Based on my technical analysis (see Chapter 2), the main challenge is not so much the start and end of the exam, but the sustained load: a high number of students actively using the system at the same time, each maintaining an ongoing connection.
+**Exams.** In the eighth and ninth grades, Danish elementary schools have a structured exam season — for example, in 2025 there was a winter exam period from December 1. to December 9.[^1] This likely creates a predictable, but significant spike in usage of our system. Based on my analysis below, the main challenge is not so much the start and end of the exam, but the sustained load: a high number of students actively using the system at the same time, each maintaining an ongoing connection.
 
-**Rarely used applications that suddenly spike.** Consider an application that normally handles 1% of total platform traffic. If a new curriculum requirement causes usage to triple overnight, that component now needs to serve 3% of traffic — a 300% increase. A system that is not designed to scale individual components independently will struggle to respond to this kind of demand.
+**Rarely used applications that suddenly spike.** Consider an application that normally handles 1% of total platform traffic. If changes in curriculum or environment cause its use to increase by 2 percentage points, that would consitute a 300% increase in load. A system that is not designed to scale components independently will struggle to respond to this kind of change.
 
-**End-of-day bulk uploads.** Picture the evening before the new school year begins, with teachers across the country uploading course materials. This is worth keeping an eye on, but it does not appear to be a high-priority concern. There are far fewer teachers than students, which limits the absolute volume of traffic. There might be pressure around specific moments — early morning on the first day of school, for instance — but overall, we mostly need to ensure that the document upload path does not become a bottleneck under moderate concurrent use.
+**End-of-day bulk uploads.** Picture the evening before the new school year begins, with teachers across the country uploading course materials. It is worth keeping an eye on the demand this puts onto our system, even though it is unlikely to become a high-priority concern. There are far fewer teachers than students, which limits the absolute volume of traffic. There might be pressure around specific moments — early morning on the first day of school, for instance — but overall, we mostly need to ensure that the document upload path does not become a bottleneck under moderate concurrent use.
 
-**The start and end of the school day.** A reasonable worry is that all students across a municipality try to open the platform at the same time when lessons begin, creating a sharp spike. In practice, however, the start of lessons and the school day are staggered across schools (municipalities allow schools to set their own timetables as long as the school day falls between 8:00 and 16:00[^2]). On top of that, teachers do not tend to launch software at the exact moment a lesson begins. For now, this does not seem to be a major concern.
+**The start and end of the school day.** A reasonable worry is that all students across a municipality try to open the platform at the same time when lessons begin, creating a sharp spike. In practice, however, the start of lessons and the school day are staggered across schools (municipalities allow schools to set their own timetables as long as the school day falls between 8:00 and 16:00[^2]). On top of that, teachers likely do not tend to launch software at the exact moment a lesson begins, which should even out incoming traffic. For now, this does not seem to be a major concern.
 
-**Collaborative seasons.** Certain periods of the school year may involve more group work than others — project weeks, themed teaching units, and similar formats. I hypothesise that collaborative editing is more demanding than solo work, because it requires continuous data exchange between clients and servers rather than occasional saves. However, it appears that these thematic weeks fall at different times of the year for different schools. This would be more of an issue for a small municipality self-hosting with only a handful of schools. For a larger deployment like what we are looking at, usage should even out.
+**Collaborative seasons.** Certain periods of the school year may involve more group work than others — project weeks, themed teaching units, and similar formats. I hypothesise that collaborative editing is more demanding than solo work, as it creates a higher need for data to be synchronized across users. However, it appears that these thematic weeks fall at different times of the year for different schools. This would be more of an issue for a small municipality self-hosting with only a handful of schools. For a larger deployment like what we are looking at, usage should even out.
 
-We can make educated guesses about these patterns, but the actual shape of real-world demand will surprise us. The goal of this document is to describe the technical characteristics of our platform under load and to propose how we should approach this technical challenge.
+We can make educated guesses about these patterns, but the actual shape of real-world demand will still surprise us at times. The goal of this document is to describe the technical characteristics of our platform under load and to propose how we should approach this technical challenge.
 
 ---
 ## 2. Technical Analysis: What I Observed
 
-To understand how the system behaves under load, I set up a sample environment running Nextcloud and Collabora — an open-source file platform and its accompanying browser-based office suite. I chose this combination because it exercises the parts of the system that would be under the most pressure during an exam: file access, document editing, and the network communication between the two. I looked at network behaviour, resource consumption, and how the system responds when components fail.
+To understand how the system behaves under load, I set up a sample environment running Nextcloud and Collabora — the way these two solutions communicate with each other (WOPI-based) will likely be seen across competing file and office platforms. This simulation exercises the parts of the system that would be under the most pressure during an exam: file access, document editing, and the network communication between the two. I looked at network behaviour, resource consumption, and how the system responds when components fail.
+
 
 ### 2.1 Network Behaviour
 
@@ -45,7 +46,7 @@ The following measurements were taken while a document was open and being edited
 
 I observed a brief CPU spike from Nextcloud when the document was opened, though this may have been a spurious, unrelated event rather than a consistent pattern. After that, Nextcloud settled at slightly under 0.02 vCPU — up from roughly 0.01 vCPU when no document was open. Interestingly, Nextcloud's CPU usage remained at this elevated level even after the document was closed.
 
-Collabora's CPU usage was more variable and closely tied to the rate of input. While emulating realistic student typing, Collabora sat at approximately 0.035 vCPU, with brief spikes up to 0.1 vCPU during bursts of rapid input. When closed, Collabora's baseline was just 0.003 vCPU. This suggests that Collabora's compute cost scales with the rate of changes being processed, rather than simply the number of open documents.
+Collabora's CPU usage was more variable and closely tied to the rate of data input. While emulating realistic student typing, Collabora sat at approximately 0.035 vCPU, with brief spikes up to 0.1 vCPU during bursts of rapid input. When closed, Collabora's baseline was just 0.003 vCPU. This suggests that Collabora's compute cost scales with the rate of changes being processed, rather than simply the number of open documents.
 
 **RAM usage:**
 
@@ -53,15 +54,17 @@ Collabora's CPU usage was more variable and closely tied to the rate of input. W
 
 Both Nextcloud and Collabora increase their RAM usage when a document is open. In my measurements, Collabora's RAM footprint grew by approximately 50 MB during an editing session, while Nextcloud's grew by approximately 10 MB. In my testing, RAM usage appeared to stabilise once the document was open — it did not continue climbing over the duration of the session.
 
+Further evaluation should determine how much resource use increases for networking and observability during peak load of these components.
+
 ### 2.3 Failure Behaviour
 
 I also tested what happens when individual components go down while a user is actively editing.
 
-**If Collabora goes down:** the editor freezes and displays a "reconnecting" message. Editing resumes once the connection is restored, and no data is lost — provided the reconnection succeeds. During an exam, however, even a temporary freeze is a serious problem: students would lose working time, which is not acceptable in a timed setting.
+**If Collabora goes down:** The editor freezes and displays a "reconnecting" message. Editing resumes once the connection is restored, and no data is lost — provided the reconnection succeeds. During an exam, however, I imagine that even a temporary freeze would be a serious problem: students would fear losing working time, which would be tremendously stressful in a timed setting.
 
-**If Nextcloud goes down briefly:** the user notices nothing. Editing continues normally. When the user closes the document, the file saves correctly — as long as Nextcloud is reachable again at that point.
+**If Nextcloud goes down briefly:** The user notices nothing. Editing continues normally. When the user closes the document, the file saves correctly — as long as Nextcloud is reachable again at that point.
 
-**If Nextcloud goes down and does not recover before the file is closed:** this is a critical scenario. My tests indicated that work done after the loss of the Nextcloud connection is silently lost, with no visible warning to the user. This does not require a prolonged outage — if Nextcloud becomes unreachable at any point during an editing session and has not recovered by the time the student closes the document, the work from that period is gone.
+**If Nextcloud goes down and does not recover before the file is closed:** This is a critical scenario. My tests indicated that work done after the loss of the Nextcloud connection is silently lost, with no visible warning to the user. 
 
 ## 3. How We Can Approach the Challenge
 
@@ -71,15 +74,15 @@ The following suggestions are informed by current best practices in site reliabi
 
 We do not yet have a complete picture of what students and teachers expect from the platform. This matters: we do not need to achieve maximum availability in all parts of the system, at all times. The right target is the level of reliability that matches what users actually need — and that level will differ depending on the feature and the context.
 
-Some distinctions are worth drawing early. Users will not tolerate a one-second delay when pressing a button to bold text. But they will likely accept a short delay before a collaborator's edits appear on their screen. These are different types of interaction with different tolerance thresholds.
+Users will not tolerate a one-second delay when pressing a button to bold text. But they will likely accept a short delay before a collaborator's edits appear on their screen. These are different types of interaction with different tolerance thresholds.
 
 Similarly, in a high-load scenario such as an exam, users may accept significant delays — a queue, a spinner, a message telling them their work is being saved — as long as they receive clear communication and confidence that nothing will be lost. I assume that the absence of communication is actually the deeper problem; the delay itself is often manageable. But this is exactly the kind of assumption we should validate with real users rather than take for granted.
 
-This means that user feedback needs to be part of our development process from early on, not just during final acceptance testing. How we plan to incorporate this feedback into our agile workflow is described in our [Iterative Development Strategy](../people_and_processes/iterative_development.md).
+This is one of the many reasons why user feedback needs to be part of our development process from early on. How we plan to incorporate this feedback into our agile workflow is described in our [Iterative Development Strategy](../people_and_processes/iterative_development.md).
 
 ### 3.2 Architectural Choices That Help
 
-Several properties of the proposed architecture that is laid out in this documentation are well suited to addressing the elasticity challenge.
+This documentation lays out an architecture that is well suited to addressing the elasticity challenge.
 
 **Microservice isolation.** Rather than building a single monolithic application, we are building services that communicate through well-defined interfaces. The practical benefit, if implemented well, is that a failure or overload in one service should not bring down the others. For example, if the office editing suite becomes unavailable, the file storage and management features remain functional. Students can still access their files — they simply cannot open them for editing until the service recovers.
 
@@ -88,6 +91,8 @@ Several properties of the proposed architecture that is laid out in this documen
 **Load shedding.** Consider what happens at the start of an exam, when every student tries to open their document simultaneously. Without load management, this surge of requests hits the server all at once, creates a bottleneck, and may cause the system to return errors. Students who receive errors often respond by refreshing the page or clicking again — which makes the congestion worse.
 
 Our architecture choices make it straightforward to implement load shedding, should we choose to do so. If we did, it would work roughly like this: when a student's request arrives during peak load, the system would not process it immediately, but would queue it and retry automatically, communicating clearly that the action is in progress. The student would experience a brief delay rather than a failure. During an exam, a short wait with a clear status message is far preferable to an error with no explanation.
+
+However, this approach is only feasible for HTTP-based requests, and not for the WebSocket request that I expect to make up a substantial part of the traffic during document editing.
 
 **Eliminating single points of failure.** Distributing services across infrastructure helps with load, but it introduces a different risk: any shared component that all services depend on becomes a single point of failure. Even if every individual application service is healthy, a failure in a shared component can halt everything.
 
@@ -101,21 +106,19 @@ Two examples illustrate how we might address this:
 
 We will not get the scaling parameters right on the first attempt. The patterns of real student behaviour will differ from our predictions in ways we cannot fully anticipate. This makes ongoing visibility into system behaviour essential.
 
-We need continuous monitoring of key metrics: uptime, response times, error rates, and resource consumption per service. This gives us the ability to detect problems early and to understand whether a change we made improved or degraded system performance.
+We need continuous monitoring of key metrics, such as uptime, response times, error rates, and resource consumption per service. This gives us the ability to detect problems early and to understand whether a change we made improved or degraded system performance.
 
-Beyond passive monitoring, I suggest we include load testing as a formal part of our test suite. Load tests let us simulate high-demand scenarios and observe how the system responds, without waiting for an actual exam period to reveal weaknesses. They also serve as regression tests: if a software update causes a performance degradation that would only surface under exam conditions, a load test will catch it before it reaches students.
-
-For load testing to be practical, deployments need to be automated. Running load tests against manually configured environments is too slow and too error-prone to be useful in a regular testing cycle.
+Beyond passive monitoring, the load testing components that is planned for our test suite will be an important tool to predict high-demand behavior. Load tests let us simulate high-demand scenarios and observe how the system responds, without waiting for an actual exam period to reveal weaknesses. They also serve as regression tests: if a software update causes a performance degradation that would only surface under exam conditions, a load test will catch it before it reaches students.
 
 ### 3.4 Infrastructure Flexibility
 
-We can reduce the need to overprovision hardware through design choices that let us seamlessly add external hardware to our network as needed. Our existing design already lays the groundwork for this.
+We can reduce the need to over-provision hardware through design choices that let us seamlessly add external hardware to our network as needed. Our existing design already lays the groundwork for this.
 
-I suggest that we ensure application components are not tightly coupled to the hardware or network environment they happen to run on. Rather than calling operating system resources directly, applications should interact with an abstraction layer. This means the same application artifact can run on different hardware configurations, in different data centres, or under different network conditions, without modification.
+Our current design proposal is in line with application components, that are not tightly coupled to the hardware or network environment they happen to run on. Rather than calling operating system resources directly, applications interact with an abstraction layer. This means the same application artifact can run on different hardware configurations, in different data centres, or under different network conditions, little modification.
 
 This portability is, in my assessment, a prerequisite for being able to expand capacity temporarily. If usage spikes beyond the capacity of our primary infrastructure, we need to be able to spin up additional capacity quickly — and that is only possible if the software does not assume anything specific about where it is running.
 
-One consequence of spreading workloads across multiple locations is that data may not be perfectly synchronised at every moment. If a user is added to a group in a database at one data centre, that change may not immediately be visible to a service running in another location. This is known as *eventual consistency*: the data will synchronise, but not necessarily instantaneously. It is possible to design replication that will cause this delay to be negligible, but the problem of synchronicity is one that we would need to keep an eye on.
+One risk of spreading workloads across multiple locations is that data may not be perfectly synchronised at every moment. If a user is added to a group in a database at one data centre, that change may not immediately be visible to a service running in another location. It is possible to design replication that will cause this delay to be negligible, but the problem of synchronicity is one that we would need to keep an eye on.
 
 ## 4. Summary: Suggestions and Open Questions
 
@@ -129,7 +132,7 @@ To summarise the findings and considerations presented in this document, I sugge
 
 **Include load testing in our test suite.** I suggest that load testing should be permanent, not a one-off exercise. We need to simulate high-demand scenarios and verify graceful handling. These tests must evolve over time, continuously adapted to reflect actual challenges observed during testing and production.
 
-**Evaluate every new component for portability and bottleneck risk.** I suggest that every new component and network connection should be assessed: does it introduce a bottleneck? Does it carry environment-specific dependencies that reduce portability? We need to avoid tight couplings that make scaling or migration harder.
+**Evaluate new components for portability and bottleneck risk.** I suggest that every new component and network connection should be assessed: does it introduce a bottleneck? Does it carry environment-specific dependencies that reduce portability? We need to avoid tight couplings that make scaling or migration harder.
 
 **Ensure rarely used applications run in portable environments.** As discussed in Chapter 1, even modest traffic increases can represent a 300% spike for a small service. These applications must run in environments where they can be moved and scaled quickly, so we can respond to spikes without massive over-provisioning.
 
