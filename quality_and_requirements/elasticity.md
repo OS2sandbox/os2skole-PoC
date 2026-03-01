@@ -1,5 +1,9 @@
 # Elasticity: Ensuring the System Can Handle High-Load Situations
 
+**Date:** Mar 1, 2026, **Author:** [@0xf1e](https://github.com/0xf1e)  
+
+A summary of suggestions is available at the [bottom of this document](#4-summary-suggestions-and-open-questions).
+
 ## 1. The Challenge
 
 A digital platform for schools needs to handle situations where hundreds or thousands of students use it at the same time. Designing for this is the problem of *elasticity*: how do we build a system that scales with demand, handles traffic spikes gracefully, and recovers from unexpected failure?
@@ -114,6 +118,37 @@ Our approach here is to ensure that application components are not tightly coupl
 This portability is a prerequisite for temporary capacity expansion. If usage spikes beyond the capacity of our primary infrastructure, we need to be able to spin up additional capacity quickly — and that is only possible if the software does not assume anything specific about where it is running.
 
 One consequence of spreading workloads across multiple locations is that data may not be perfectly synchronised at every moment. If a user is added to a group in a database at one data centre, that change may not immediately be visible to a service running in another location. This is known as *eventual consistency*: the data will synchronise, but not necessarily instantaneously. It is possible to design replication that will cause this delay to be negligible, but the problem of synchronicity is one that we would need to keep an eye on.
+
+## 4. Summary: Suggestions and Open Questions
+
+To summarise the findings and considerations presented in this document, I would suggest the following action items, ongoing priorities, and open questions to help ensure our system can handle the challenge of a nationwide exam season.
+
+### Action Items and Ongoing Priorities
+
+**Establish partnerships for temporary capacity.** We should explore partnerships with external hosting centres for temporary capacity during peak periods like exam season. This is especially important during the first year, where we should over-provision — so that unexpected capacity needs show up in our dashboards rather than in frustrated users.
+
+**Continuously monitor CPU, RAM, and network data flows.** From early test environments through to production, we need visibility into CPU, RAM, and network behaviour. Data bottlenecks between services only become visible through request tracing. Setting up this monitoring early gives us the foundation for informed scaling decisions.
+
+**Include load testing in our test suite.** Load testing should be permanent, not a one-off exercise. We need to simulate high-demand scenarios and verify graceful handling. These tests must evolve over time, continuously adapted to reflect actual challenges observed during testing and production.
+
+**Evaluate every new component for portability and bottleneck risk.** Every new component and network connection should be assessed: does it introduce a bottleneck? Does it carry environment-specific dependencies that reduce portability? We need to avoid tight couplings that make scaling or migration harder.
+
+**Ensure rarely used applications run in portable environments.** As discussed in Chapter 1, even modest traffic increases can represent a 300% spike for a small service. These applications must run in environments where they can be moved and scaled quickly, so we can respond to spikes without massive over-provisioning.
+
+### Open Questions
+
+**What are the actual usage patterns of teachers and students?** Do all teachers upload files at 8 in the morning? Do students refresh their browser when bored? These unknown unknowns cannot be uncovered through architectural planning alone — only through direct conversation and observation.
+
+**How does collaborative work affect system load compared to individual work?** Does real-time collaboration generate meaningfully more load than solo editing? I currently consider this low to medium risk, but we should gather data as we learn more about how teachers structure group work.
+
+---
+
+## Document Context
+
+**Originally intended Audience and Purpose of this Document (March 1st, 2026):**
+
+- External analysts: Can this project feasibly handle high-load situations under its current design and budget?
+- Our team: Is our current design suitable for the availability and elasticity we expect from the system? How can we ensure our future decisions do not impede it?
 
 ---
 
