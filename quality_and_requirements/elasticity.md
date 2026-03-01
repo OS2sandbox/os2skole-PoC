@@ -33,7 +33,7 @@ Opening a document in Collabora triggers several HTTP requests between the brows
 
 Separately — and independently of Collabora — the browser sends a request to a Nextcloud `/sync` endpoint approximately once per second. This polling continues as long as the user has Nextcloud open in their browser, whether or not a document is being edited.
 
-Together, these two behaviours define the baseline network cost per connected user: a steady stream of sync requests from Nextcloud, plus a persistent WebSocket connection for each active editing session.
+From what we have observed, the baseline network cost per connected user seems to consist of a steady stream of sync requests from Nextcloud, plus a persistent WebSocket connection for each active editing session.
 
 ### 2.2 CPU and RAM Consumption
 
@@ -43,15 +43,15 @@ The following measurements were taken while a document was open and being edited
 
 ![](./_resources/cpu_prometheus_collabora_edited.png)
 
-Nextcloud shows a brief CPU spike when the document opens, though this may be a spurious, unrelated event rather than a consistent pattern. After that, Nextcloud settles at slightly under 0.02 vCPU — up from roughly 0.01 vCPU when no document is open. Interestingly, Nextcloud's CPU usage remained at this elevated level even after the document was closed.
+We observed a brief CPU spike from Nextcloud when the document was opened, though this may have been a spurious, unrelated event rather than a consistent pattern. After that, Nextcloud settled at slightly under 0.02 vCPU — up from roughly 0.01 vCPU when no document was open. Interestingly, Nextcloud's CPU usage remained at this elevated level even after the document was closed.
 
-Collabora's CPU usage is more variable and closely tied to the rate of input. While emulating realistic student typing, Collabora sat at approximately 0.035 vCPU, with brief spikes up to 0.1 vCPU during bursts of rapid input. When closed, Collabora's baseline was just 0.003 vCPU. This suggests that Collabora's compute cost scales with the rate of changes being processed, rather than simply the number of open documents.
+Collabora's CPU usage was more variable and closely tied to the rate of input. While emulating realistic student typing, Collabora sat at approximately 0.035 vCPU, with brief spikes up to 0.1 vCPU during bursts of rapid input. When closed, Collabora's baseline was just 0.003 vCPU. This suggests that Collabora's compute cost scales with the rate of changes being processed, rather than simply the number of open documents.
 
 **RAM usage:**
 
 ![](./_resources/ram_prometheus_collabora_edited.png)
 
-Both Nextcloud and Collabora increase their RAM usage when a document is open. In our measurements, Collabora's RAM footprint grew by approximately 50 MB during an editing session, while Nextcloud's grew by approximately 10 MB. Importantly, RAM usage stabilises once the document is open — it does not continue climbing over time.
+Both Nextcloud and Collabora increase their RAM usage when a document is open. In our measurements, Collabora's RAM footprint grew by approximately 50 MB during an editing session, while Nextcloud's grew by approximately 10 MB. In our testing, RAM usage appeared to stabilise once the document was open — it did not continue climbing over the duration of the session.
 
 ### 2.3 Failure Behaviour
 
@@ -61,13 +61,11 @@ We also tested what happens when individual components go down while a user is a
 
 **If Nextcloud goes down briefly:** the user notices nothing. Editing continues normally. When the user closes the document, the file saves correctly — as long as Nextcloud is reachable again at that point.
 
-**If Nextcloud goes down and does not recover before the file is closed:** this is a critical scenario. Any work done after the loss of the Nextcloud connection is silently lost. The student receives no warning that their changes are not being persisted. This does not require a prolonged outage — if Nextcloud becomes unreachable at any point during an editing session and has not recovered by the time the student closes the document, the work from that period is gone.
+**If Nextcloud goes down and does not recover before the file is closed:** this is a critical scenario. Our tests indicated that work done after the loss of the Nextcloud connection is silently lost, with no visible warning to the user. This does not require a prolonged outage — if Nextcloud becomes unreachable at any point during an editing session and has not recovered by the time the student closes the document, the work from that period is gone.
 
 ## 3. How We Can Approach the Challenge
 
 My suggestions here rest on four areas: understanding actual user expectations, designing the architecture to handle load sensibly, investing in visibility and load testing, and planning for infrastructure flexibility. These suggestions are informed by current best practices in site reliability engineering, particularly Google's SRE literature.[^sre]
-
-These are not final decisions. They represent my current thinking on how we should approach the elasticity challenge, and they are open for discussion.
 
 ### 3.1 Start with User Expectations
 
@@ -81,11 +79,11 @@ This means that user feedback needs to be part of our development process from e
 
 ### 3.2 Architectural Choices That Help
 
-Several properties of our planned architecture are well suited to addressing the elasticity challenge.
+Several properties of the proposed architecture that is laid out in this documentation are well suited to addressing the elasticity challenge.
 
-**Microservice isolation.** Rather than building a single monolithic application, we are building services that communicate through well-defined interfaces. The practical benefit is that if one service fails or becomes overloaded, the others continue operating. For example, if the office editing suite becomes unavailable, the file storage and management features remain functional. Students can still access their files — they simply cannot open them for editing until the service recovers.
+**Microservice isolation.** Rather than building a single monolithic application, we are building services that communicate through well-defined interfaces. The practical benefit, if implemented well, is that a failure or overload in one service should not bring down the others. For example, if the office editing suite becomes unavailable, the file storage and management features remain functional. Students can still access their files — they simply cannot open them for editing until the service recovers.
 
-**Independent scaling.** With a monolithic architecture, scaling means duplicating the entire application. With a microservice architecture, we can scale only the components that are under pressure. If the document editing service is struggling during an exam, we can allocate more resources to it specifically, without touching the login service, the file storage layer, or anything else.
+**Independent scaling.** A microservice architecture opens the possibility of scaling individual components independently — for instance, allocating more resources to document editing during an exam without touching other services.
 
 **Load shedding.** Consider what happens at the start of an exam, when every student tries to open their document simultaneously. Without load management, this surge of requests hits the server all at once, creates a bottleneck, and may cause the system to return errors. Students who receive errors often respond by refreshing the page or clicking again — which makes the congestion worse.
 
@@ -115,19 +113,19 @@ Finally, we need the ability to move workloads between infrastructure as demand 
 
 Our approach here is to ensure that application components are not tightly coupled to the hardware or network environment they happen to run on. Rather than calling operating system resources directly, applications interact with an abstraction layer. This means the same application artifact can run on different hardware configurations, in different data centres, or under different network conditions, without modification.
 
-This portability is a prerequisite for temporary capacity expansion. If usage spikes beyond the capacity of our primary infrastructure, we need to be able to spin up additional capacity quickly — and that is only possible if the software does not assume anything specific about where it is running.
+This portability is, in my assessment, a prerequisite for being able to expand capacity temporarily. If usage spikes beyond the capacity of our primary infrastructure, we need to be able to spin up additional capacity quickly — and that is only possible if the software does not assume anything specific about where it is running.
 
 One consequence of spreading workloads across multiple locations is that data may not be perfectly synchronised at every moment. If a user is added to a group in a database at one data centre, that change may not immediately be visible to a service running in another location. This is known as *eventual consistency*: the data will synchronise, but not necessarily instantaneously. It is possible to design replication that will cause this delay to be negligible, but the problem of synchronicity is one that we would need to keep an eye on.
 
 ## 4. Summary: Suggestions and Open Questions
 
-To summarise the findings and considerations presented in this document, I would suggest the following action items, ongoing priorities, and open questions to help ensure our system can handle the challenge of a nationwide exam season.
+To summarise the findings and considerations presented in this document, I suggest the following action items, ongoing priorities, and open questions to help ensure our system can handle the challenge of a nationwide exam season.
 
 ### Action Items and Ongoing Priorities
 
 **Establish partnerships for temporary capacity.** We should explore partnerships with external hosting centres for temporary capacity during peak periods like exam season. This is especially important during the first year, where we should over-provision — so that unexpected capacity needs show up in our dashboards rather than in frustrated users.
 
-**Continuously monitor CPU, RAM, and network data flows.** From early test environments through to production, we need visibility into CPU, RAM, and network behaviour. Data bottlenecks between services only become visible through request tracing. Setting up this monitoring early gives us the foundation for informed scaling decisions.
+**Continuously monitor CPU, RAM, and network data flows.** From early test environments through to production, we need visibility into CPU, RAM, and network behaviour. Data bottlenecks between services are often difficult to detect without request tracing. Setting up this monitoring early gives us the foundation for informed scaling decisions.
 
 **Include load testing in our test suite.** Load testing should be permanent, not a one-off exercise. We need to simulate high-demand scenarios and verify graceful handling. These tests must evolve over time, continuously adapted to reflect actual challenges observed during testing and production.
 
@@ -157,4 +155,3 @@ To summarise the findings and considerations presented in this document, I would
 [^2]: Danish schools have considerable freedom in setting their timetables within the 8:00–16:00 window. See: [Spørgsmål og svar om frihedsgrader og fleksibilitet i folkeskolen](https://uvm.dk/grundskole/folkeskolen/lovgivning-og-politiske-aftaler/politiske-aftaler/folkeskolens-kvalitetsprogram/frisaettelse-af-folkeskolen/eksisterende-frihedsgrader/spoergsmaal-og-svar-om-frihedsgrader-og-fleksibilitet-i-folkeskolen/#accordion-er-der-krav-om-at-skolerne-skal-anvende-laringsplatforme)
 
 [^sre]: See [sre.google](https://sre.google) for Google's published material on site reliability engineering practices.
-
