@@ -73,7 +73,7 @@ Some distinctions are worth drawing early. Users will not tolerate a one-second 
 
 Similarly, in a high-load scenario such as an exam, users may accept significant delays — a queue, a spinner, a message telling them their work is being saved — as long as they receive clear communication and confidence that nothing will be lost. I assume that the absence of communication is actually the deeper problem; the delay itself is often manageable. But this is exactly the kind of assumption we should validate with real users rather than take for granted.
 
-This means that user feedback needs to be part of our development process from early on, not just during final acceptance testing. How we plan to incorporate this feedback into our agile workflow is described in the [User Feedback and Iteration Process](#TODO-link-to-section).
+This means that user feedback needs to be part of our development process from early on, not just during final acceptance testing. How we plan to incorporate this feedback into our agile workflow is described in our [Iterative Development Strategy](../people_and_processes/iterative_development.md).
 
 ### 3.2 Architectural Choices That Help
 
@@ -113,15 +113,13 @@ Our approach here is to ensure that application components are not tightly coupl
 
 This portability is a prerequisite for temporary capacity expansion. If usage spikes beyond the capacity of our primary infrastructure, we need to be able to spin up additional capacity quickly — and that is only possible if the software does not assume anything specific about where it is running.
 
-One consequence of spreading workloads across multiple locations is that data may not be perfectly synchronised at every moment. If a user is added to a group in a database at one data centre, that change may not immediately be visible to a service running in another location. This is known as *eventual consistency*: the data will synchronise, but not necessarily instantaneously.[^3] For most school platform interactions, this is an acceptable trade-off. Where it is not — for example, access control during an exam — we need to design those specific flows to account for it.
+One consequence of spreading workloads across multiple locations is that data may not be perfectly synchronised at every moment. If a user is added to a group in a database at one data centre, that change may not immediately be visible to a service running in another location. This is known as *eventual consistency*: the data will synchronise, but not necessarily instantaneously. It is possible to design replication that will cause this delay to be negligible, but the problem of synchronicity is one that we would need to keep an eye on.
 
 ---
 
 [^1]: See the Danish Ministry of Children and Education's exam calendar: [Prøveplan vinter 2025–2026](https://uvm.dk/grundskole/folkeskolen/folkeskolens-proever/aarsplan-og-proeveplaner/proeveplan-vinter-2025-2026)
 
 [^2]: Danish schools have considerable freedom in setting their timetables within the 8:00–16:00 window. See: [Spørgsmål og svar om frihedsgrader og fleksibilitet i folkeskolen](https://uvm.dk/grundskole/folkeskolen/lovgivning-og-politiske-aftaler/politiske-aftaler/folkeskolens-kvalitetsprogram/frisaettelse-af-folkeskolen/eksisterende-frihedsgrader/spoergsmaal-og-svar-om-frihedsgrader-og-fleksibilitet-i-folkeskolen/#accordion-er-der-krav-om-at-skolerne-skal-anvende-laringsplatforme)
-
-[^3]: Eventual consistency is a well-established concept in distributed systems design. In practice, synchronisation delays are typically measured in milliseconds to seconds, depending on network conditions and the replication strategy in use.
 
 [^sre]: See [sre.google](https://sre.google) for Google's published material on site reliability engineering practices.
 
