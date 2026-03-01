@@ -150,14 +150,6 @@ To summarise the findings and considerations presented in this document, I sugge
 
 ---
 
-[^1]: See the Danish Ministry of Children and Education's exam calendar: [Prøveplan vinter 2025–2026](https://uvm.dk/grundskole/folkeskolen/folkeskolens-proever/aarsplan-og-proeveplaner/proeveplan-vinter-2025-2026)
-
-[^2]: Danish schools have considerable freedom in setting their timetables within the 8:00–16:00 window. See: [Spørgsmål og svar om frihedsgrader og fleksibilitet i folkeskolen](https://uvm.dk/grundskole/folkeskolen/lovgivning-og-politiske-aftaler/politiske-aftaler/folkeskolens-kvalitetsprogram/frisaettelse-af-folkeskolen/eksisterende-frihedsgrader/spoergsmaal-og-svar-om-frihedsgrader-og-fleksibilitet-i-folkeskolen/#accordion-er-der-krav-om-at-skolerne-skal-anvende-laringsplatforme)
-
-[^sre]: See [sre.google](https://sre.google) for Google's published material on site reliability engineering practices.
-
----
-
 ## Document Context
 
 **Originally intended Audience and Purpose of this Document (March 1st, 2026):**
@@ -166,3 +158,9 @@ To summarise the findings and considerations presented in this document, I sugge
 - Our team: Is our current design suitable for the availability and elasticity we expect from the system? How can we ensure our future decisions do not impede it?
 
 ---
+
+[^1]: See the Danish Ministry of Children and Education's exam calendar: [Prøveplan vinter 2025–2026](https://uvm.dk/grundskole/folkeskolen/folkeskolens-proever/aarsplan-og-proeveplaner/proeveplan-vinter-2025-2026)
+
+[^2]: Danish schools have considerable freedom in setting their timetables within the 8:00–16:00 window. See: [Spørgsmål og svar om frihedsgrader og fleksibilitet i folkeskolen](https://uvm.dk/grundskole/folkeskolen/lovgivning-og-politiske-aftaler/politiske-aftaler/folkeskolens-kvalitetsprogram/frisaettelse-af-folkeskolen/eksisterende-frihedsgrader/spoergsmaal-og-svar-om-frihedsgrader-og-fleksibilitet-i-folkeskolen/#accordion-er-der-krav-om-at-skolerne-skal-anvende-laringsplatforme)
+
+[^sre]: See [sre.google](https://sre.google) for Google's published material on site reliability engineering practices.
