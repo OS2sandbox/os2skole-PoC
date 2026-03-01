@@ -138,7 +138,13 @@ To summarise the findings and considerations presented in this document, I sugge
 
 ### Open Questions
 
-**What are the actual usage patterns of teachers and students?** Do all teachers upload files at 8 in the morning? Do students refresh their browser when bored? These unknown unknowns cannot be uncovered through architectural planning alone — only through direct conversation and observation.
+**What is the baseline number of concurrent users on a regular day?** The severity of exam-related spikes depends entirely on how many users are already active. If 40,000 users are online daily, having 10,000 of them take an exam changes little. If only 10,000 are typically active, doubling that number is significant. We need to establish this baseline early.
+
+**How much additional load do supporting services experience under peak usage?** Components like observability tooling and networking infrastructure also see increased demand when application services are under load. We do not yet have measurements for this, partly because the design of these supporting services is still open. As those designs take shape, we should quantify their resource needs under stress.
+
+**What other interactions occur around an exam beyond document editing?** Students may need to submit finished work to a classroom management system, creating a sudden wave of simultaneous HTTP requests to a single service. They might also pre-emptively log out and back in before the exam to confirm their session is valid, putting sharp pressure on the IAM system. We need to understand the full sequence of user actions surrounding an exam so we can scale the right services at the right time.
+
+**What are the actual usage patterns of teachers and students?** Do all teachers upload files at 8 in the morning? Do students refresh their browser when bored? These unknowns cannot be uncovered through architectural prediction alone — only through direct conversation and observation.
 
 **How does collaborative work affect system load compared to individual work?** Does real-time collaboration generate meaningfully more load than solo editing? I currently consider this low to medium risk, but I suggest we gather data as we learn more about how teachers structure group work.
 
