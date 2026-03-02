@@ -30,6 +30,8 @@ To understand how the system behaves under load, I set up a sample environment r
 
 ### 2.1 Network Behaviour
 
+In the test system described above, I deployed istio and configured it to trace all network calls.
+
 Opening a document in Collabora triggers several HTTP requests between the browser, Nextcloud, and Collabora. One of these requests upgrades the connection to a WebSocket — a persistent, two-way channel that stays open for the duration of the editing session. When a user idles for an extended period, the WebSocket connection closes; it re-establishes automatically when the user starts interacting again.
 
 Separately — and independently of Collabora — the browser sends a request to a Nextcloud `/sync` endpoint approximately once per second. This polling continues as long as the user has Nextcloud open in their browser, whether or not a document is being edited.
@@ -138,7 +140,7 @@ To summarise the findings and considerations presented in this document, I sugge
 
 ### Open Questions
 
-**What is the baseline number of concurrent users on a regular day?** The severity of exam-related spikes depends entirely on how many users are already active. If 40,000 users are online daily, having 10,000 of them take an exam changes little. If only 10,000 are typically active, doubling that number is significant. We need to establish this baseline early.
+**What is the baseline number of concurrent users on a regular day?** The severity of exam-related spikes depends entirely on how many users are already active. Assuming a system size of 100,000 users, 10,000 of which would be taking an exam: If 40,000 users are online daily, having 10,000 of them take an exam changes little. If only 10,000 are typically active, doubling that number is significant. We need to establish this baseline early.
 
 **How much additional load do supporting services experience under peak usage?** Components like observability tooling and networking infrastructure also see increased demand when application services are under load. We do not yet have measurements for this, partly because the design of these supporting services is still open. As those designs take shape, we should quantify their resource needs under stress.
 
